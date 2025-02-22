@@ -27,3 +27,7 @@ class Square extends Rectangle {
 // Do not change the code below this line
 window.Rectangle = Rectangle;
 window.Square = Square;
+const rectangle = new Rectangle(5, 10);
+console.log(`Width: ${rectangle.width}`);    // Output: Width: 5
+console.log(`Height: ${rectangle.height}`);  // Output: Height: 10
+console.log(`Area: ${rectangle.getArea()}`);
