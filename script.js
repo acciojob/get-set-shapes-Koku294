@@ -25,22 +25,37 @@ window.Rectangle = Rectangle;
 window.Square = Square;
 // Example usage
 it("calculates area and perimeter correctly", () => {
-  cy.visit('http://localhost:3000'); // Update the URL as per your setup
+  // Visit the page with the Rectangle and Square class definitions
+  cy.visit(baseUrl + "/main.html");
 
+  // Access the window object where the classes are exposed
   cy.window().then((win) => {
-    const Rectangle = win.Rectangle;  // Access the Rectangle class
-    const Square = win.Square;        // Access the Square class
+    // Ensure that the classes are available in the window object
+    const Rectangle = win.Rectangle;
+    const Square = win.Square;
 
-    const rectangle = new Rectangle(5, 10);
-    const square = new Square(7);
+    // Stub the console.log method to spy on it (optional, depending on your test case)
+    cy.stub(win.console, "log").as("consoleLog");
 
-    expect(rectangle.width).to.equal(5);
-    expect(rectangle.height).to.equal(10);
-    expect(rectangle.getArea()).to.equal(50);
+    // Define test values for rectangle and square
+    const rect_w = 5;
+    const rect_h = 10;
+    const sq_s = 7;
 
-    expect(square.width).to.equal(7);
-    expect(square.height).to.equal(7);
-    expect(square.getArea()).to.equal(49);
-    expect(square.getPerimeter()).to.equal(28);
+    // Create instances of Rectangle and Square
+    const rectangle = new Rectangle(rect_w, rect_h);
+    const square = new Square(sq_s);
+
+    // Test Rectangle properties and methods
+    expect(rectangle.width).to.equal(rect_w);
+    expect(rectangle.height).to.equal(rect_h);
+    expect(rectangle.getArea()).to.equal(rect_w * rect_h);
+
+    // Test Square properties and methods
+    expect(square.width).to.equal(sq_s);
+    expect(square.height).to.equal(sq_s);
+    expect(square.getArea()).to.equal(sq_s * sq_s);
+    expect(square.getPerimeter()).to.equal(sq_s * 4);
   });
 });
+
