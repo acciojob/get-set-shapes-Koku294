@@ -34,3 +34,9 @@ class Square extends Rectangle {
     return 4 * this.width; // Since width == height for square
   }
 }
+it('my test', () => {
+  cy.once('uncaught:exception', () => false);
+  
+  // action that causes exception
+  cy.get('body').click();
+});
