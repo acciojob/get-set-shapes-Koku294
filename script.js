@@ -1,42 +1,35 @@
 class Rectangle {
-  private _width: number;
-  private _height: number;
-
-  constructor(width: number, height: number) {
-    this._width = width;
-    this._height = height;
-  }
-
-  // Getter for width
-  get width(): number {
-    return this._width;
-  }
-
-  // Getter for height
-  get height(): number {
-    return this._height;
+  constructor(width, height) {
+    this.width = width;   // Public property for width
+    this.height = height; // Public property for height
   }
 
   // Method to calculate area
-  getArea(): number {
-    return this._width * this._height;
+  getArea() {
+    return this.width * this.height;
   }
 }
 
 class Square extends Rectangle {
-  constructor(side: number) {
+  constructor(side) {
     // Calls the parent constructor with both width and height set to the side length
     super(side, side);
   }
 
   // Method to calculate perimeter
-  getPerimeter(): number {
+  getPerimeter() {
     return 4 * this.width; // Since width == height for square
   }
 }
-it('my test', () => {
-  cy.once('uncaught:exception', () => false);
-  
-  // action that causes exception
-  cy.get('body').click();
-});
+
+// Example usage
+const rectangle = new Rectangle(5, 10);
+console.log(rectangle.width); // 5
+console.log(rectangle.height); // 10
+console.log(rectangle.getArea()); // 50
+
+const square = new Square(7);
+console.log(square.width); // 7
+console.log(square.height); // 7
+console.log(square.getArea()); // 49
+console.log(square.getPerimeter()); // 28
