@@ -21,15 +21,26 @@ class Square extends Rectangle {
     return 4 * this.width; // Since width == height for square
   }
 }
-
+window.Rectangle = Rectangle;
+window.Square = Square;
 // Example usage
-const rectangle = new Rectangle(5, 10);
-console.log(rectangle.width); // 5
-console.log(rectangle.height); // 10
-console.log(rectangle.getArea()); // 50
+it("calculates area and perimeter correctly", () => {
+  cy.visit('http://localhost:3000'); // Update the URL as per your setup
 
-const square = new Square(7);
-console.log(square.width); // 7
-console.log(square.height); // 7
-console.log(square.getArea()); // 49
-console.log(square.getPerimeter()); // 28
+  cy.window().then((win) => {
+    const Rectangle = win.Rectangle;  // Access the Rectangle class
+    const Square = win.Square;        // Access the Square class
+
+    const rectangle = new Rectangle(5, 10);
+    const square = new Square(7);
+
+    expect(rectangle.width).to.equal(5);
+    expect(rectangle.height).to.equal(10);
+    expect(rectangle.getArea()).to.equal(50);
+
+    expect(square.width).to.equal(7);
+    expect(square.height).to.equal(7);
+    expect(square.getArea()).to.equal(49);
+    expect(square.getPerimeter()).to.equal(28);
+  });
+});
